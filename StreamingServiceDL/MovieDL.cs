@@ -8,51 +8,113 @@ namespace StreamingServiceDL
     public class MovieDL
 
     {
-        List<User> dummyUser = new List<User>();
+        List<User> movie = new List<User>();
+
 
         public MovieDL()
-        {
-            CreateDummyUser();
-        }
+         {
+             
+             MovieTitle();
+         }
 
-        public void CreateDummyUser()
+        public void MovieTitle()
         {
-            User user1 = new User
+            User title1 = new User
             {
-                Username = "Neo",
-                Password = "hello"
+                Title = "Avengers: Endgame"
+
             };
 
-            User user2 = new User
+            User title2 = new User
             {
-                Username = "Chelle",
-                Password = "hello"
+                Title = "Avengers: Infinity War"
+
             };
 
-            dummyUser.Add(user1);
-            dummyUser.Add(user2);
+            User title3 = new User
+            {
+                Title = "Black Panther"
+
+            };
+
+            User title4 = new User
+            {
+                Title = "The Avengers"
+
+            };
+
+            User title5 = new User
+            {
+                Title = "Avengers: Age of Ultron"
+
+            };
+
+            User title6 = new User
+            {
+                Title = "Iron Man 3"
+
+            };
+
+            User title7 = new User
+            {
+                Title = "Captain America: Civil War"
+
+            };
+
+            User title8 = new User
+            {
+                Title = "Spider-Man: Homecoming"
+
+            };
+
+            User title9 = new User
+            {
+                Title = "Guardians of the Galaxy Vol. 2"
+
+            };
+
+            User title10 = new User
+            {
+                Title = "Thor: Ragnarok"
+
+            };
+
+            movie.Add(title1);
+            movie.Add(title2);
+            movie.Add(title3);
+            movie.Add(title4);
+            movie.Add(title5);
+            movie.Add(title6);
+            movie.Add(title7);
+            movie.Add(title8);
+            movie.Add(title9);
+            movie.Add(title10);
 
         }
 
-        public User GetUser (string Username)
+        public User GetTitle(string Title)
         {
-            User foundUser = new User();
-            foreach (var user in  dummyUser)
+            User foundtitle = new User();
+            foreach (var user in movie)
             {
-                if (Username == user.Username)
+                if (Title == user.Title)
                 {
-                    foundUser = user;
-                    
+                    foundtitle = user;
+
                 }
+
+                
             }
 
-            return foundUser;
+            return foundtitle;
         }
-        
-        public static void Movie1(string code)
+
+
+        public static void Movie1(string Title)
         {
+
             Console.WriteLine("-----------------------------------------------------");
-            Console.WriteLine("NOW PLAYING");
+            
             Console.WriteLine("");
             Console.WriteLine("Title: Avengers: Endgame");
             Console.WriteLine("Release Date: April 26, 2019");
@@ -61,9 +123,10 @@ namespace StreamingServiceDL
             Console.WriteLine("");
             Console.WriteLine("ENJOY WATCHING!");
             Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine();
         }
 
-        public static void Movie2(string code)
+        public static void Movie2(string Title)
         {
             Console.WriteLine("-----------------------------------------------------");
             Console.WriteLine("NOW PLAYING");
@@ -75,9 +138,10 @@ namespace StreamingServiceDL
             Console.WriteLine("");
             Console.WriteLine("ENJOY WATCHING!");
             Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine();
         }
 
-        public static void Movie3(string code)
+        public static void Movie3(string Title)
         {
             Console.WriteLine("-----------------------------------------------------");
             Console.WriteLine("NOW PLAYING");
@@ -89,9 +153,10 @@ namespace StreamingServiceDL
             Console.WriteLine("");
             Console.WriteLine("ENJOY WATCHING!");
             Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine();
         }
 
-        public static void Movie4(string code)
+        public static void Movie4(string Title)
         {
             Console.WriteLine("-----------------------------------------------------");
             Console.WriteLine("NOW PLAYING");
@@ -103,9 +168,10 @@ namespace StreamingServiceDL
             Console.WriteLine("");
             Console.WriteLine("ENJOY WATCHING!");
             Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine();
         }
 
-        public static void Movie5(string code)
+        public static void Movie5(string Title)
         {
             Console.WriteLine("-----------------------------------------------------");
             Console.WriteLine("NOW PLAYING");
@@ -117,9 +183,10 @@ namespace StreamingServiceDL
             Console.WriteLine("");
             Console.WriteLine("ENJOY WATCHING!");
             Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine();
         }
 
-        public static void Movie6(string code)
+        public static void Movie6(string Title)
         {
             Console.WriteLine("-----------------------------------------------------");
             Console.WriteLine("NOW PLAYING");
@@ -131,9 +198,10 @@ namespace StreamingServiceDL
             Console.WriteLine("");
             Console.WriteLine("ENJOY WATCHING!");
             Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine();
         }
 
-        public static void Movie7(string code)
+        public static void Movie7(string Title)
         {
             Console.WriteLine("-----------------------------------------------------");
             Console.WriteLine("NOW PLAYING");
@@ -145,9 +213,10 @@ namespace StreamingServiceDL
             Console.WriteLine("");
             Console.WriteLine("ENJOY WATCHING!");
             Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine();
         }
 
-        public static void Movie8(string code)
+        public static void Movie8(string Title)
         {
             Console.WriteLine("-----------------------------------------------------");
             Console.WriteLine("NOW PLAYING");
@@ -159,9 +228,10 @@ namespace StreamingServiceDL
             Console.WriteLine("");
             Console.WriteLine("ENJOY WATCHING!");
             Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine();
         }
 
-        public static void Movie9(string code)
+        public static void Movie9(string Title)
         {
             Console.WriteLine("-----------------------------------------------------");
             Console.WriteLine("NOW PLAYING");
@@ -173,9 +243,10 @@ namespace StreamingServiceDL
             Console.WriteLine("");
             Console.WriteLine("ENJOY WATCHING!");
             Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine();
         }
 
-        public static void Movie10(string code)
+        public static void Movie10(string Title)
         {
             Console.WriteLine("-----------------------------------------------------");
             Console.WriteLine("NOW PLAYING");
