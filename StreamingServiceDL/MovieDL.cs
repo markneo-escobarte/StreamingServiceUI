@@ -10,13 +10,6 @@ namespace StreamingServiceDL
     {
         List<User> movie = new List<User>();
 
-
-        public MovieDL()
-         {
-             
-             MovieTitle();
-         }
-
         public void MovieTitle()
         {
             User title1 = new User

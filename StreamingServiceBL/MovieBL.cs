@@ -4,19 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StreamingServiceDL;
+using StreamingServiceModel;
 
 namespace StreamingServiceBL
 {
     public class MovieBL
     {
-        public bool VerifyTitle(string Title)
-        {
-            MovieDL movieDL = new MovieDL();
-            var result = movieDL.GetTitle(Title);
-
-            return result.Title != null ? true : false;
-        }
-
+        private readonly SqlDbData _dataService; 
+        
         public bool VerifyUser(string Username, string Password)
         {
             UserDL movieDL = new UserDL();
@@ -25,12 +20,31 @@ namespace StreamingServiceBL
             return result1.Username != null ? true : false;
         }
 
-        public bool UserProfile(string username, string password, string title)
+         public MovieBL()
         {
-            SqlDbData dataService = new SqlDbData();
-            var result2 = dataService.GetMovie();
-
-            return result2 != null;
+            _dataService = new SqlDbData();
         }
+
+        public List<User> GetTitle()
+        {
+            return _dataService.GetTitle();
+        }
+
+        public void AddTitle(string title)
+        {
+            _dataService.AddTitle(new User { Title = title });
+        }
+
+        public void DeleteTitle(string title)
+        {
+            _dataService.DeleteTitle(title);
+        }
+
+        public void UpdateTitle(string oldTitle, string newTitle)
+        {
+            _dataService.UpdateTitle(oldTitle, newTitle);
+
+        }
+
     }
 }

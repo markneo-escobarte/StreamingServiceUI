@@ -71,19 +71,20 @@ namespace StreamingServiceUI
                     Console.WriteLine("2. delete - Remove a movie from watchlist");
                     Console.WriteLine("3. view - View watchlist");
                     Console.WriteLine("4. quit - log out profile");
+                    Console.WriteLine("5. update - Update watchlist");
                     Console.WriteLine("");
                     Console.Write("Enter your action here: ");
                     string action = Console.ReadLine();
 
-                    if(action == "add")
+                    if (action == "add")
                     {
                         Console.WriteLine("");
                         Console.Write("Enter a movie title here: ");
                         string Title = Console.ReadLine();
 
-                        dataService.AddTitle(new User { Title = Title});
+                        dataService.AddTitle(new User { Title = Title });
 
-                        
+
                         Console.WriteLine("");
                         Console.WriteLine("-----------------------------------------------------");
 
@@ -179,7 +180,7 @@ namespace StreamingServiceUI
                             loggedIn = false;
                             Console.WriteLine(Username + " has logged out");
                             Console.WriteLine();
-                            
+
                         }
 
 
@@ -190,7 +191,7 @@ namespace StreamingServiceUI
                         Console.Write("Enter a movie title here to delete: ");
                         string Title = Console.ReadLine();
 
-                        dataService.DeleteMovie(Title);
+                        dataService.DeleteTitle(Title);
 
                         Console.WriteLine("-----------------------------------------------------");
                         Console.WriteLine("");
@@ -201,6 +202,7 @@ namespace StreamingServiceUI
                         if (Title.ToLower() == "quit")
                         {
                             loggedIn = false;
+                            Console.WriteLine("");
                             Console.WriteLine(Username + " has logged out");
                             Console.WriteLine();
 
@@ -213,26 +215,71 @@ namespace StreamingServiceUI
                         Console.WriteLine("");
                         Console.WriteLine("My Watchlist: ");
 
-                        int movieIndex = 0;
 
-                        foreach (var addedTitle in dataService.GetMovie())
+                        int movieIndex = 1;
+
+                        foreach (var addedTitle in dataService.GetTitle())
                         {
                             Console.WriteLine($"{movieIndex++}: {addedTitle.Title}");
-                            
+
                         }
+
                         Console.WriteLine("");
-                        Console.Write("Enter your action here: ");
+                        Console.Write("Type 'quit' to log out or press Enter to continue: ");
                         string Title = Console.ReadLine();
 
                         if (Title.ToLower() == "quit")
                         {
                             loggedIn = false;
+                            Console.WriteLine("");
                             Console.WriteLine(Username + " has logged out");
                             Console.WriteLine();
 
                         }
 
                     }
+                    else if (action == "update")
+                    {
+                        Console.WriteLine("");
+                        Console.Write("Enter the current movie title: ");
+                        string oldTitle = Console.ReadLine();
+
+                        Console.WriteLine("");
+                        Console.Write("Enter the new movie title: ");
+                        string newTitle = Console.ReadLine();
+
+                        dataService.UpdateTitle(oldTitle, newTitle);
+
+                        Console.WriteLine("-----------------------------------------------------");
+                        Console.WriteLine($"{oldTitle} successfully updated to {newTitle} in your watchlist.");
+                        Console.WriteLine("-----------------------------------------------------");
+
+
+                        Console.WriteLine("");
+                        Console.Write("Type 'quit' to log out or press Enter to continue: ");
+                        string Title = Console.ReadLine();
+
+                        if (Title.ToLower() == "quit")
+                        {
+                            loggedIn = false;
+                            Console.WriteLine("");
+                            Console.WriteLine(Username + " has logged out");
+                            Console.WriteLine();
+
+                        }
+
+                    }
+
+                    else if (action.ToLower() == "quit")
+                    {
+                        loggedIn = false;
+                        Console.WriteLine("");
+                        Console.WriteLine(Username + " has logged out");
+                        Console.WriteLine();
+                    }
+
+
+
                     else
                     {
                         Console.WriteLine("It appears that the action you requested is invalid.");

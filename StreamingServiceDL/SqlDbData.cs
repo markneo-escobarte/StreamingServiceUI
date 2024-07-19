@@ -10,18 +10,19 @@ namespace StreamingServiceDL
     public class SqlDbData
     {
         static string connectionString
-        = "Data Source = LAPTOP-78G5SIK7\\SQLEXPRESS; Initial Catalog = StreamingService; Integrated Security = True;";
+        //= "Data Source = LAPTOP-78G5SIK7\\SQLEXPRESS; Initial Catalog = StreamingService; Integrated Security = True;";
+        = "Server = tcp:20.2.89.26,1433;Database= StreamingService;User Id= sa;Password= Rureuo@7172003";
 
-       static SqlConnection sqlConnection = new SqlConnection(connectionString);
+        static SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         public static void Connect() 
         {
             sqlConnection.Open();
         }
 
-        public List<User> GetMovie() 
+        public List<User> GetTitle() 
 {   
-             List<User> movie = new List<User>();
+             List<User> users = new List<User>();
 
         using (SqlConnection sqlConnection = new SqlConnection(connectionString))
     {
@@ -34,16 +35,16 @@ namespace StreamingServiceDL
         {
             while (reader.Read())
             {
-                User user = new User
+                User user = new User()
                 {
                     
                     Title = reader["title"].ToString()
                 };
 
-                movie.Add(user);
+                        users.Add(user);
             }
 
-            return movie;
+            return users;
         }
     }
 }
@@ -52,7 +53,7 @@ namespace StreamingServiceDL
         {
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
-                string insertStatement = "INSERT INTO users VALUES (@title)";
+                string insertStatement = "INSERT INTO users (Title) VALUES (@title)";
 
                 SqlCommand insertCommand = new SqlCommand(insertStatement, sqlConnection);
 
@@ -66,7 +67,7 @@ namespace StreamingServiceDL
             }  
 
         }
-        public void DeleteMovie(string title)
+        public void DeleteTitle(string title)
         {
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
@@ -74,7 +75,7 @@ namespace StreamingServiceDL
                 SqlCommand deleteCommand = new SqlCommand(deleteStatement, sqlConnection);
 
 
-                deleteCommand.Parameters.AddWithValue("@title", title).Value = title;
+                deleteCommand.Parameters.AddWithValue("@title", title);
 
                 sqlConnection.Open();
 
@@ -83,6 +84,23 @@ namespace StreamingServiceDL
                 sqlConnection.Close();
             }           
         }
+
+        public void UpdateTitle(string oldTitle, string newTitle)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                string updateStatement = "UPDATE users SET title = @newTitle WHERE title = @oldTitle";
+                SqlCommand updateCommand = new SqlCommand(updateStatement, sqlConnection);
+
+                updateCommand.Parameters.AddWithValue("@newTitle", newTitle);
+                updateCommand.Parameters.AddWithValue("@oldTitle", oldTitle);
+
+                sqlConnection.Open();
+                updateCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+            }
+        }
+
     }
 
 }
