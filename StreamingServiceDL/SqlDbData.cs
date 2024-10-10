@@ -10,44 +10,51 @@ namespace StreamingServiceDL
     public class SqlDbData
     {
         static string connectionString
-        //= "Data Source = LAPTOP-78G5SIK7\\SQLEXPRESS; Initial Catalog = StreamingService; Integrated Security = True;";
-        = "Server = tcp:20.2.89.26,1433;Database= StreamingService;User Id= sa;Password= Rureuo@7172003";
+        = "Data Source = LAPTOP-78G5SIK7\\SQLEXPRESS; Initial Catalog = StreamingService; Integrated Security = True;";
+        //= "Server = tcp:20.2.89.26,1433;Database= StreamingService;User Id= sa;Password= Rureuo@7172003";
 
         static SqlConnection sqlConnection = new SqlConnection(connectionString);
 
-        public static void Connect() 
+        public static void Connect()
         {
             sqlConnection.Open();
         }
 
-        public List<User> GetTitle() 
-{   
-             List<User> users = new List<User>();
+        private readonly EmailTool _emailTool;
 
-        using (SqlConnection sqlConnection = new SqlConnection(connectionString))
-    {
-        string selectStatement = "SELECT title FROM users";
-        SqlCommand selectCommand = new SqlCommand(selectStatement, sqlConnection);
-
-        sqlConnection.Open();
-
-        using (SqlDataReader reader = selectCommand.ExecuteReader())
+        public SqlDbData()
         {
-            while (reader.Read())
+            _emailTool = new EmailTool();
+        }
+
+        public List<User> GetTitle()
+        {
+            List<User> users = new List<User>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
-                User user = new User()
+                string selectStatement = "SELECT title FROM users";
+                SqlCommand selectCommand = new SqlCommand(selectStatement, sqlConnection);
+
+                sqlConnection.Open();
+
+                using (SqlDataReader reader = selectCommand.ExecuteReader())
                 {
-                    
-                    Title = reader["title"].ToString()
-                };
+                    while (reader.Read())
+                    {
+                        User user = new User()
+                        {
+
+                            Title = reader["title"].ToString()
+                        };
 
                         users.Add(user);
-            }
+                    }
 
-            return users;
+                    return users;
+                }
+            }
         }
-    }
-}
 
         public void AddTitle(User user)
         {
@@ -57,14 +64,16 @@ namespace StreamingServiceDL
 
                 SqlCommand insertCommand = new SqlCommand(insertStatement, sqlConnection);
 
-               
+
                 insertCommand.Parameters.AddWithValue("@title", user.Title);
                 sqlConnection.Open();
 
                 insertCommand.ExecuteNonQuery();
 
-            
-            }  
+
+            }
+
+            _emailTool.SendEmail("Movie Added to Watchlist", $"You have successfully added '{user.Title}' to your watchlist.");
 
         }
         public void DeleteTitle(string title)
@@ -82,7 +91,10 @@ namespace StreamingServiceDL
                 deleteCommand.ExecuteNonQuery();
 
                 sqlConnection.Close();
-            }           
+            }
+
+            _emailTool.SendEmail("Movie Deleted from Watchlist", $"You have successfully deleted '{title}' from your watchlist.");
+
         }
 
         public void UpdateTitle(string oldTitle, string newTitle)
@@ -99,7 +111,11 @@ namespace StreamingServiceDL
                 updateCommand.ExecuteNonQuery();
                 sqlConnection.Close();
             }
+
+            _emailTool.SendEmail("Movie Updated in Watchlist", $"You have successfully updated '{oldTitle}' to '{newTitle}' in your watchlist.");
+
         }
+
 
     }
 

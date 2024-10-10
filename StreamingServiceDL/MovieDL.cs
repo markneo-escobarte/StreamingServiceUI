@@ -96,7 +96,7 @@ namespace StreamingServiceDL
 
                 }
 
-                
+
             }
 
             return foundtitle;
@@ -107,7 +107,7 @@ namespace StreamingServiceDL
         {
 
             Console.WriteLine("-----------------------------------------------------");
-            
+
             Console.WriteLine("");
             Console.WriteLine("Title: Avengers: Endgame");
             Console.WriteLine("Release Date: April 26, 2019");

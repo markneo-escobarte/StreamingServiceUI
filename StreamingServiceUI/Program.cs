@@ -1,4 +1,5 @@
-﻿using StreamingServiceBL;
+﻿using Org.BouncyCastle.Security;
+using StreamingServiceBL;
 using StreamingServiceDL;
 using StreamingServiceModel;
 using System;
@@ -12,14 +13,14 @@ namespace StreamingServiceUI
             SqlDbData.Connect();
 
             bool loggedIn = false;
-            while(true) 
+            while (true)
             {
                 Console.WriteLine("-----------------------------------------------------");
                 Console.WriteLine("            Welcome to Marvel Assemble!");
                 Console.WriteLine("Binge Worthy Marvel Cinematic Universe Movies Below!");
                 Console.WriteLine();
                 Console.WriteLine("-----------------------------------------------------");
-                
+
                 Console.Write("Enter your username: ");
                 string Username = Console.ReadLine();
 
@@ -31,7 +32,7 @@ namespace StreamingServiceUI
 
                 SqlDbData dataService = new SqlDbData();
 
-                if (result1) 
+                if (result1)
                 {
                     loggedIn = true;
                     Console.WriteLine("-----------------------------------------------------");
@@ -83,7 +84,6 @@ namespace StreamingServiceUI
                         string Title = Console.ReadLine();
 
                         dataService.AddTitle(new User { Title = Title });
-
 
                         Console.WriteLine("");
                         Console.WriteLine("-----------------------------------------------------");
@@ -290,7 +290,9 @@ namespace StreamingServiceUI
 
                 }
             }
-        
+
+            
+
         }
     }
 }

@@ -36,6 +36,7 @@ namespace StreamingServiceAPI.Controllers
         {
             _movieBL.AddTitle(user.Title);
             return new JsonResult("Movie added successfully");
+
         }
 
         [HttpPatch]
