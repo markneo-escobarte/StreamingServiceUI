@@ -24,6 +24,7 @@ namespace StreamingServiceDL
 
             using (var client = new SmtpClient())
             {
+
                 try
                 {
                     client.Connect("sandbox.smtp.mailtrap.io", 2525, MailKit.Security.SecureSocketOptions.StartTls);
